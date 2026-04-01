@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
-    "start": "babel-node index.js"
+    "start": "babel-node index.js",
+    "output-check": "diff output.json output.json.og"
   },
   "devDependencies": {},
   "dependencies": {
