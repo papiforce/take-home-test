@@ -99,6 +99,28 @@ describe("Pharmacy", () => {
     });
   });
 
+  describe("Dafalgan", () => {
+    it("should degrade benefit twice as fast as normal", () => {
+      const drug = updateDrug("Dafalgan", 10, 20);
+      expect(drug).toEqual(new Drug("Dafalgan", 9, 18));
+    });
+
+    it("should degrade benefit 4x when expired (twice as fast × expired)", () => {
+      const drug = updateDrug("Dafalgan", 0, 20);
+      expect(drug).toEqual(new Drug("Dafalgan", -1, 16));
+    });
+
+    it("should not decrease benefit below 0", () => {
+      const drug = updateDrug("Dafalgan", 10, 1);
+      expect(drug).toEqual(new Drug("Dafalgan", 9, 0));
+    });
+
+    it("should not decrease benefit below 0 when expired", () => {
+      const drug = updateDrug("Dafalgan", 0, 3);
+      expect(drug).toEqual(new Drug("Dafalgan", -1, 0));
+    });
+  });
+
   describe("Edge cases", () => {
     it("should handle benefit already at 0 for normal drug", () => {
       const drug = updateDrug("Doliprane", -1, 0);

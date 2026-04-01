@@ -29,6 +29,11 @@ const strategies = {
 
     drug.expiresIn -= 1;
   },
+
+  Dafalgan(drug) {
+    drug.benefit -= drug.expiresIn <= 0 ? 4 : 2;
+    drug.expiresIn -= 1;
+  },
 };
 
 const defaultStrategy = (drug) => {
